@@ -15,38 +15,38 @@ namespace ITUniver.TeleCalc.ConCalc
             double y;
             bool args1 = (Double.TryParse(args[1], out x));
             bool args2 = (Double.TryParse(args[2], out y));
+            string args0 = args[0].ToLower();
 
             if ((args1 == true) && (args2 == true))
             {
-                if (args[0].ToLower() == "sum")
+                switch (args0)
                 {
-                    Console.WriteLine(Calculator.Sum(x, y));
-                }
+                    case "sum":
+                        Console.WriteLine(Calculator.Sum(x, y));
+                        break;
 
-                if (args[0].ToLower() == "sub")
-                {
-                    Console.WriteLine(Calculator.Sub(x, y));
-                }
+                    case "sub":
+                        Console.WriteLine(Calculator.Sub(x, y));
+                        break;
 
-                if (args[0].ToLower() == "mul")
-                {
-                    Console.WriteLine(Calculator.Mul(x, y));
-                }
+                    case "mul":
+                        Console.WriteLine(Calculator.Mul(x, y));
+                        break;
 
-                if (args[0].ToLower() == "div")
-                {
-                    Console.WriteLine(Calculator.Div(x, y));
-                }
+                    case "div":
+                        Console.WriteLine(Calculator.Div(x, y));
+                        break;
 
-                if (args[0].ToLower() == "pow")
-                {
-                    Console.WriteLine(Calculator.Pow(x, y));
+                    case "pow":
+                        Console.WriteLine(Calculator.Pow(x, y));
+                        break;
+
+                    default:
+                        Console.WriteLine("Операция не существует");
+                        break;
+
                 }
-                else
-                {
-                    Console.WriteLine("Операция не существует");
-                }
-            }
+            } 
 
            else
             {
