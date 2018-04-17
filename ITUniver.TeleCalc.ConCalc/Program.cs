@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ITUniver.TeleCalc.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,50 +12,38 @@ namespace ITUniver.TeleCalc.ConCalc
     {
         static void Main(string[] args)
         {
-            Calc Calculator = new Calc();
-            double x;
-            double y;
-            bool args1 = (Double.TryParse(args[1], out x));
-            bool args2 = (Double.TryParse(args[2], out y));
-            string args0 = args[0].ToLower();
-
-            if ((args1 == true) && (args2 == true))
+            var calc = new Calc();
             {
-                switch (args0)
+                if (args.Length != 3)
                 {
-                    case "sum":
-                        Console.WriteLine(Calculator.Sum(x, y));
-                        break;
+                    Console.WriteLine("Пожалуйста, выберите номер операции:" + "\n");
+                    var list = calc.operations;
+                    for (int i = 1; i <= list.Length; i++)
+                    {
+                        Console.WriteLine(i.ToString() + ". " + list[i-1] + "\n");
+                    }
 
-                    case "sub":
-                        Console.WriteLine(Calculator.Sub(x, y));
-                        break;
+                    string a = Console.ReadLine();
+                    int number;
+                    if (Int32.TryParse(a, out number))
 
-                    case "mul":
-                        Console.WriteLine(Calculator.Mul(x, y));
-                        break;
 
-                    case "div":
-                        Console.WriteLine(Calculator.Div(x, y));
-                        break;
 
-                    case "pow":
-                        Console.WriteLine(Calculator.Pow(x, y));
-                        break;
-
-                    default:
-                        Console.WriteLine("Операция не существует");
-                        break;
-
+                    Console.ReadKey();
+                    return;
                 }
-            } 
 
-           else
-            {
-                Console.WriteLine("Операция не может быть выполнена");
+                string operName = args[0];
+
+                double x = Double.Parse(args[1]);
+                double y = Double.Parse(args[2]);
+
+                
+                double? result = calc.Exec(operName, x, y);
+
+                Console.WriteLine(string.Format("{0}{1}{2} = {3}", x, operName, y, result));
+                Console.ReadKey();
             }
-
-            Console.ReadLine();
 
         }
 
