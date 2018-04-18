@@ -31,7 +31,8 @@ namespace ITUniver.TeleCalc.ConCalc
                     else
                     {
                         Console.WriteLine("Введите аргументы через пробел");
-
+                        string argum = Console.ReadLine();
+                        string[] array = argum.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     }
                    
 
