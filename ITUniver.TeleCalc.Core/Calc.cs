@@ -12,6 +12,12 @@ namespace ITUniver.TeleCalc.Core
     {
 
         public IOperation[] operations { get; set; }
+
+        public IEnumerable<string> GetOperNames()
+        {
+            return operations.Select(c => c.Name);
+
+        }
         public Calc()
    
         {

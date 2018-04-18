@@ -9,17 +9,10 @@ namespace ITUniver.TeleCalc.Core.Operations
     internal class Mul : IOperation
     {
         public string Name => "mul";
-        public double[] Args {
-            set
-            {
-                var mul = 0d;
-                foreach (var item in value)
-                {
-                    mul = mul*item;
-                }
-                Result = mul;
-            }
-             get { return new double[0]; }
+        public double[] Args
+        {
+            set { Result = value.Aggregate((x,y) => x*y); }
+            get { return new double[0]; }
         }
 
         public string Error { get; }

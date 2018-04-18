@@ -14,45 +14,39 @@ namespace ITUniver.TeleCalc.ConCalc
         static void Main(string[] args)
         {
             var calc = new Calc();
+            string operName = " ";
+            double x;
+            double y;
+
+            if (args.Length == 3)
             {
-                if (args.Length != 3)
-                {
-                    Console.WriteLine("Пожалуйста, выберите операцию:" + "\n");
-                    var list = calc.operations;
-                    for (int i = 1; i <= list.Length; i++)
-                    {
-                        Console.WriteLine(i.ToString() + ". " + list[i-1] + "\n");
-                    }
-
-                    string oppname = Console.ReadLine();
-                    IOperation oper = list.FirstOrDefault(c => c.Name == oppname);
-                    if (oper == null)
-                        Console.WriteLine("Операция не существует");
-                    else
-                    {
-                        Console.WriteLine("Введите аргументы через пробел");
-                        string argum = Console.ReadLine();
-                        string[] array = argum.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    }
-                   
-
-
-
-                    Console.ReadKey();
-                    return;
-                }
-
-                string operName = args[0];
-
-                double x = Double.Parse(args[1]);
-                double y = Double.Parse(args[2]);
-
-                
-                double? result = calc.Exec(operName, x, y);
-
-                Console.WriteLine(string.Format("{0}{1}{2} = {3}", x, operName, y, result));
-                Console.ReadKey();
+                operName = args[0];
+                x = Double.Parse(args[1]);
+                y = Double.Parse(args[2]);
             }
+
+            else 
+            {
+              Console.WriteLine("Пожалуйста, выберите операцию:" + "\n");
+              var list = calc.GetOperNames();
+              foreach (var item in list)
+              {
+                Console.WriteLine(item);
+              }
+
+              operName = Console.ReadLine();
+              Console.WriteLine("Введите параметры через пробел");
+              var data = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+              x = double.Parse(data[0]);
+              y = double.Parse(data[1]);
+              
+            }
+            
+
+            var result = calc.Exec(operName, x, y);
+            //double? result = calc.Exec(operName, x, y);
+            Console.WriteLine(string.Format("{0}{1}{2} = {3}", x, operName, y, result));
+            Console.ReadKey();
 
         }
 

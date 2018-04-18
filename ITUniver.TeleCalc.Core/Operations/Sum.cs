@@ -10,17 +10,11 @@ namespace ITUniver.TeleCalc.Core.Operations
     {
         public string Name => "sum";
         //public string Name { get { return "sum"; } }
-        public double[] Args {
-            set
-            {
-                var sum = 0d;
-                foreach (var item in value)
-                {
-                    sum = sum + item;
-                }
-                Result = sum;
-            }
-             get { return new double[0]; }
+        public double[] Args
+        {
+           
+                set { Result = value.Aggregate((x, y) => x + y); }
+                get { return new double[0]; } 
         }
 
         public string Error { get; }
