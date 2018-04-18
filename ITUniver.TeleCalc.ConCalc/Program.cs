@@ -1,4 +1,5 @@
 ﻿using ITUniver.TeleCalc.Core;
+using ITUniver.TeleCalc.Core.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,23 @@ namespace ITUniver.TeleCalc.ConCalc
             {
                 if (args.Length != 3)
                 {
-                    Console.WriteLine("Пожалуйста, выберите номер операции:" + "\n");
+                    Console.WriteLine("Пожалуйста, выберите операцию:" + "\n");
                     var list = calc.operations;
                     for (int i = 1; i <= list.Length; i++)
                     {
                         Console.WriteLine(i.ToString() + ". " + list[i-1] + "\n");
                     }
 
-                    string a = Console.ReadLine();
-                    int number;
-                    if (Int32.TryParse(a, out number))
+                    string oppname = Console.ReadLine();
+                    IOperation oper = list.FirstOrDefault(c => c.Name == oppname);
+                    if (oper == null)
+                        Console.WriteLine("Операция не существует");
+                    else
+                    {
+                        Console.WriteLine("Введите аргументы через пробел");
+
+                    }
+                   
 
 
 
