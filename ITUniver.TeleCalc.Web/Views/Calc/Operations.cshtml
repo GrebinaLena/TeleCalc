@@ -8,9 +8,11 @@
 <h2>Operations</h2>
 
 <div>
-    @foreach (var oper in operations)
+    @foreach (string oper in operations)
     {
-        <br/>@oper
+        <br/>
+        @Html.Partial("Operation", oper)
+      
     }
 </div>
 
