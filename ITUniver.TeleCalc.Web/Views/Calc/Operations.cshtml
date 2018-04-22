@@ -1,18 +1,16 @@
-﻿
-@{
-    ViewBag.Title = "Operations";
-    var operations = ViewBag.operations;
-
+﻿@{
+    ViewBag.Title = "ITUniver forever";
+    var list = ViewBag.Operations;
 }
 
-<h2>Operations</h2>
+<h2>ITUniver forever</h2>
 
-<div>
-    @foreach (string oper in operations)
+<ul class="list-group">
+    @foreach (var item in list)
     {
-        <br/>
-        @Html.Partial("Operation", oper)
-      
+        <li class="list-group-item">
+            @item
+        </li>
     }
-</div>
+</ul>
 

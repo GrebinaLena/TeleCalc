@@ -14,25 +14,25 @@ namespace ITUniver.TeleCalc.Web.Controllers
         // GET: Calc
         Calc Calc = new Core.Calc();
 
+        [HttpPost]
+        public double Exec(CalcModel model)
+        {
+            if (Calc.GetOperNames().Contains(model.OperName))
+            {
+                return Calc.Exec(model.OperName, model.X, model.Y);
+            }
+          //  model.OperationList = new SelectList(Calc.GetOperNames());
+            return double.NaN;
+        }
 
         [HttpGet]
         public ActionResult Exec()
         {
-            return View();
+            var model = new CalcModel();
+            model.OperationList = new SelectList(Calc.GetOperNames());
+ 
+                return View(model);
         }
-
-        [HttpPost]
-
-
-        public ActionResult Exec(CalcModel model)
-        {
-            if (Calc.GetOperNames().Contains(model.OperName))
-            {
-                model.Result = Calc.Exec(model.OperName, model.X, model.Y);
-            }
-            return View(model);
-        }
-
 
         [HttpGet]
         public ActionResult Index(string operName, double? x, double? y)
