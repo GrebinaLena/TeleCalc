@@ -50,6 +50,7 @@ namespace ITUniver.TeleCalc.Core
 
         }
 
+        [Obsolete("Используйте метод Exec(operName, args)")]
         public double Exec(string operName, double x, double y)
         {
             IOperation operation = operations
@@ -62,6 +63,17 @@ namespace ITUniver.TeleCalc.Core
             return (double)operation.Result;
         }
 
+        public double Exec(string operName, IEnumerable<double> args)
+        {
+            IOperation operation = operations
+                .FirstOrDefault(o => o.Name == operName);
+
+            if (operation == null)
+                return double.NaN;
+
+            operation.Args = args.ToArray();
+            return (double)operation.Result;
+        }
 
         public double Sum(double x, double y)
         {

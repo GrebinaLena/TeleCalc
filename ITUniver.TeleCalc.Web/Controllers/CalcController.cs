@@ -14,15 +14,18 @@ namespace ITUniver.TeleCalc.Web.Controllers
         // GET: Calc
         Calc Calc = new Core.Calc();
 
+
         [HttpPost]
-        public double Exec(CalcModel model)
+        public PartialViewResult Exec(CalcModel model)
         {
+            var result = double.NaN;
+
             if (Calc.GetOperNames().Contains(model.OperName))
             {
-                return Calc.Exec(model.OperName, model.X, model.Y);
+                result = Calc.Exec(model.OperName, model.InputData);
             }
-          //  model.OperationList = new SelectList(Calc.GetOperNames());
-            return double.NaN;
+
+            return PartialView("ExecResult", result);
         }
 
         [HttpGet]
